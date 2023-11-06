@@ -1,0 +1,2 @@
+# flask==2.1.* installing this part in dockerfile for a different way of doing it
+redis

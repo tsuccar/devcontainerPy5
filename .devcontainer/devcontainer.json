@@ -1,0 +1,95 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres
+{
+  "name": "Python & Redis",
+  "dockerComposeFile": "docker-compose.yml",
+  //service is needed to point to docker-compose.yml
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "installOhMyZshConfig": true,
+      "upgradePackages": true,
+      // "username": "automatic",
+      // "userUid": "automatic",
+      // "userGid": "automatic"
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000"
+    }
+  },
+
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  // "features": {},
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // This can be used to network with other containers or with the host.
+  "forwardPorts": [3000, 5002, 5678, 6379, 8000],
+  "portsAttributes": {
+    "5002": {
+      "label": "Application",
+      "onAutoForward": "notify"
+    },
+    "5678": {
+      "label": "Deubg",
+      "onAutoForward": "notify"
+    },
+    "6378": {
+      "label": "Redis",
+      "onAutoForward": "notify"
+    }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  //   "postCreateCommand": "npm install"
+
+  // Configure tool-specific properties.
+  "customizations": {
+    // Configure properties specific to VS Code.
+    "vscode": {
+      // Set *default* container specific settings.json values on container create.
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.testing.pytestArgs": ["."],
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestEnabled": true,
+        "pthon.formatting.provider": "black",
+        "python.testing.pytestPath": "/usr/local/py-utils/bin/pytest",
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          },
+          "zsh": {
+            "path": "zsh"
+          },
+          "fish": {
+            "path": "fish"
+          },
+          "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+          },
+          "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+          }
+        }
+      },
+
+      // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-azuretools.vscode-docker",
+        "ms-python.black-formatter",
+        "rangav.vscode-thunder-client"
+      ]
+    }
+  },
+  // "overrideCommand": false,
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "vscode"
+}
